@@ -11,4 +11,18 @@
 // .quantidade: todos os input[type=number] com a quantidade de dados a serem rolados
 // #quantidadeD{4,6,8,10,12,20}: um ID para cada input[type=number] com a quantidade
 
-
+document.querySelector('#rolar').addEventListener('click', () => {
+	document.querySelector('#recipienteResultados').classList.remove('oculto')
+	const results = document.querySelector('#resultado')
+	results.innerHTML = ''
+	let sum = 0
+	document.querySelectorAll('input').forEach(input => {
+		const size = input.id.slice(11) // remove quantidadeD from ID
+		for(let i = 0; i < input.value; i ++) {
+			const number = Math.ceil(Math.random()*size)
+			sum += number
+			results.innerHTML += `${number} + `
+		}
+	})
+	results.innerHTML = results.innerHTML === '' ? '0' : `${results.innerHTML.slice(0, results.innerHTML.length - 3)} = ${sum}`
+})
